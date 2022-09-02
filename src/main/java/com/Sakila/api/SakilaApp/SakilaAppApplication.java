@@ -17,12 +17,14 @@ public class SakilaAppApplication {
 	private ActorRepository actorRepository;
 	private FilmRepository filmRepository;
 	private CategoryRepository categoryRepository;
+	private LanguageRepository languageRepository;
 
 
-	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository){
+	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
 		this.categoryRepository = categoryRepository;
+		this.languageRepository = languageRepository;
 	}
 
 	public static void main(String[] args) {
@@ -147,6 +149,43 @@ public class SakilaAppApplication {
 		category.setCategory_name(newCategory.category_name);
 		categoryRepository.save(category);
 		return ("Category has been successfully updated!");
+	}
+
+	////Language
+
+	@GetMapping("/allLanguage")
+	public @ResponseBody
+	Iterable<Language> getAllLanguage(){
+		return languageRepository.findAll();
+	}
+
+	@GetMapping("/Language/{id}")
+	@ResponseBody
+	public Optional<Language> getLanguage(@PathVariable Integer id){
+		return languageRepository.findById(id);
+	}
+
+	@PostMapping("/Language")
+	@ResponseBody
+	public String addLanguage(@RequestBody Language language){
+		languageRepository.save(language);
+		return ("Language successfully added!");
+	}
+
+	@DeleteMapping("/Language/{id}")
+	@ResponseBody
+	public String deleteLanguage(@PathVariable Integer id){
+		languageRepository.deleteById(id);
+		return ("Language successfully deleted");
+	}
+
+	@PutMapping("/Language/{id}")
+	@ResponseBody
+	public String updateLanguage(@PathVariable Integer id, @RequestBody Language newLanguage){
+		final Language language = languageRepository.findById(id).get();
+		language.setLanguage_name(newLanguage.language_name);
+		languageRepository.save(language);
+		return ("Language has been successfully updated!");
 	}
 
 }
