@@ -89,6 +89,12 @@ public class SakilaAppApplication {
 		return ("Film successfully added!");
 	}
 
+	@GetMapping("/filmActorFirstLastName/{id}")
+	@ResponseBody
+	Iterable<Object> getFilmActorsFirstLastName(@PathVariable Integer id){
+		return filmRepository.getFilmActorsFirstLastName(id);
+	}
+
 	@DeleteMapping("/Film/{id}")
 	@ResponseBody
 	public String deleteFilm(@PathVariable Integer id){
