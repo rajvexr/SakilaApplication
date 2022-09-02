@@ -56,6 +56,16 @@ public class SakilaAppApplication {
 		return ("Actor successfully deleted");
 	}
 
+	@PutMapping("/Actor/{id}")
+	@ResponseBody
+	public String updateActor(@PathVariable Integer id, @RequestBody Actor newActor){
+		final Actor actor = actorRepository.findById(id).get();
+		actor.setActorFirstName(newActor.actorFirstName);
+		actor.setActorLastName(newActor.actorLastName);
+		actorRepository.save(actor);
+		return ("Actor has been successfully updated!");
+	}
+
 	/////Films
 
 	@GetMapping("/allFilms")
@@ -84,6 +94,24 @@ public class SakilaAppApplication {
 		return ("Film successfully deleted");
 	}
 
+	@PutMapping("/Film/{id}")
+	@ResponseBody
+	public String updateFilm(@PathVariable Integer id, @RequestBody Film newFilm){
+		final Film film = filmRepository.findById(id).get();
+		film.setTitle(newFilm.title);
+		film.setDescription(newFilm.description);
+		film.setRelease_year(newFilm.release_year);
+		film.setLanguage_id(newFilm.language_id);
+		film.setRental_duration(newFilm.rental_duration);
+		film.setRental_rate(newFilm.rental_rate);
+		film.setLength(newFilm.length);
+		film.setReplacement_cost(newFilm.replacement_cost);
+		film.setRating(newFilm.rating);
+		film.setSpecial_features(newFilm.special_features);
+		filmRepository.save(film);
+		return ("Film has been successfully updated!");
+	}
+
 	////Category
 
 	@GetMapping("/allCategory")
@@ -110,6 +138,15 @@ public class SakilaAppApplication {
 	public String deleteCategory(@PathVariable Integer id){
 		categoryRepository.deleteById(id);
 		return ("Category successfully deleted");
+	}
+
+	@PutMapping("/Category/{id}")
+	@ResponseBody
+	public String updateCategory(@PathVariable Integer id, @RequestBody Category newCategory){
+		final Category category = categoryRepository.findById(id).get();
+		category.setCategory_name(newCategory.category_name);
+		categoryRepository.save(category);
+		return ("Category has been successfully updated!");
 	}
 
 }
