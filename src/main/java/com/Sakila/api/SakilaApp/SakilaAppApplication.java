@@ -128,6 +128,12 @@ public class SakilaAppApplication {
 		return categoryRepository.findById(id);
 	}
 
+	@GetMapping("/filmCategory/{id}")
+	@ResponseBody
+	public Iterable<Object> getFilmCategory(@PathVariable Integer id){
+		return filmRepository.getFilmCategory(id);
+	}
+
 	@PostMapping("/Category")
 	@ResponseBody
 	public String addCategory(@RequestBody Category category){

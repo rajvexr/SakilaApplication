@@ -1,6 +1,4 @@
 package com.Sakila.api.SakilaApp;
-
-
 import javax.persistence.*;
 
 @Entity
