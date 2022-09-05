@@ -95,6 +95,18 @@ public class SakilaAppApplication {
 		return filmRepository.getFilmActorsFirstLastName(id);
 	}
 
+	@GetMapping("/filmRating/{id}")
+	@ResponseBody
+	Iterable<Object> getFilmRating(@PathVariable Integer id){
+		return filmRepository.getFilmRating(id);
+	}
+
+	@GetMapping("/actorFilms/{id}")
+	@ResponseBody
+	Iterable<Object> getActorFilms(@PathVariable Integer id){
+		return filmRepository.getActorFilms(id);
+	}
+
 	@DeleteMapping("/Film/{id}")
 	@ResponseBody
 	public String deleteFilm(@PathVariable Integer id){
@@ -139,6 +151,7 @@ public class SakilaAppApplication {
 	public Iterable<Object> getFilmCategory(@PathVariable Integer id){
 		return filmRepository.getFilmCategory(id);
 	}
+
 
 	@PostMapping("/Category")
 	@ResponseBody
