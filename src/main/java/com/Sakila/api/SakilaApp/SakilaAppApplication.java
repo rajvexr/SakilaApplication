@@ -91,14 +91,20 @@ public class SakilaAppApplication {
 
 	@GetMapping("/filmActorFirstLastName/{id}")
 	@ResponseBody
-	Iterable<Object> getFilmActorsFirstLastName(@PathVariable Integer id){
-		return filmRepository.getFilmActorsFirstLastName(id);
+	Iterable<Actor> getFilmActorsFirstLastName(@PathVariable Integer id){
+		return actorRepository.getFilmActorsFirstLastName(id);
 	}
 
 	@GetMapping("/filmRating/{id}")
 	@ResponseBody
 	Iterable<Object> getFilmRating(@PathVariable Integer id){
 		return filmRepository.getFilmRating(id);
+	}
+
+	@GetMapping("/Rating/{id}")
+	@ResponseBody
+	Iterable<Object> getRatings(@PathVariable Integer id){
+		return filmRepository.getRatings(id);
 	}
 
 	@GetMapping("/actorFilms/{id}")
@@ -146,10 +152,16 @@ public class SakilaAppApplication {
 		return categoryRepository.findById(id);
 	}
 
-	@GetMapping("/filmCategory/{id}")
+	@GetMapping("/filmCategory/{id}") //identifying a category for a specific film
 	@ResponseBody
-	public Iterable<Object> getFilmCategory(@PathVariable Integer id){
-		return filmRepository.getFilmCategory(id);
+	public Iterable<Category> getFilmCategory(@PathVariable Integer id){
+		return categoryRepository.getFilmCategory(id);
+	}
+
+	@GetMapping("/categoryFilm/{id}")
+	@ResponseBody
+	public Iterable<Category> getCategoryFilm(@PathVariable Integer id){
+		return categoryRepository.getCategoryFilm(id);
 	}
 
 
