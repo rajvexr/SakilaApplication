@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Random;
 
 @SpringBootApplication
 @RestController
@@ -19,6 +20,7 @@ public class SakilaAppApplication {
 	private CategoryRepository categoryRepository;
 	private LanguageRepository languageRepository;
 
+	Random random = new Random();
 
 	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){
 		this.actorRepository = actorRepository;
@@ -95,21 +97,17 @@ public class SakilaAppApplication {
 		return actorRepository.getFilmActorsFirstLastName(id);
 	}
 
-	@GetMapping("/filmRating/{id}")
-	@ResponseBody
-	Iterable<Object> getFilmRating(@PathVariable Integer id){
-		return filmRepository.getFilmRating(id);
-	}
-
+	//displays all films with a specific rating
 	@GetMapping("/Rating/{id}")
 	@ResponseBody
-	Iterable<Object> getRatings(@PathVariable Integer id){
+	Iterable<Film> getRatings(@PathVariable Integer id){
 		return filmRepository.getRatings(id);
 	}
 
+	//displays an actor with all the films they have participated in
 	@GetMapping("/actorFilms/{id}")
 	@ResponseBody
-	Iterable<Object> getActorFilms(@PathVariable Integer id){
+	Iterable<Film> getActorFilms(@PathVariable Integer id){
 		return filmRepository.getActorFilms(id);
 	}
 
@@ -160,10 +158,9 @@ public class SakilaAppApplication {
 
 	@GetMapping("/categoryFilm/{id}")
 	@ResponseBody
-	public Iterable<Category> getCategoryFilm(@PathVariable Integer id){
-		return categoryRepository.getCategoryFilm(id);
+	public Iterable<Film> getCategoryFilm(@PathVariable Integer id){
+		return filmRepository.getCategoryFilm(id);
 	}
-
 
 	@PostMapping("/Category")
 	@ResponseBody
