@@ -1,3 +1,6 @@
+com\Sakila\api\SakilaApp\CategoryTest.class
+com\Sakila\api\SakilaApp\FilmTest.class
 com\Sakila\api\SakilaApp\MockTest.class
 CucumberTests\DisplayAllFilmsStepsDefs.class
 CucumberTests\RunCucumberTests.class
+com\Sakila\api\SakilaApp\LanguageTest.class
