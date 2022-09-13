@@ -19,8 +19,7 @@ public class SakilaAppApplication {
 	private FilmRepository filmRepository;
 	private CategoryRepository categoryRepository;
 	private LanguageRepository languageRepository;
-
-	Random random = new Random();
+	
 
 	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){
 		this.actorRepository = actorRepository;
