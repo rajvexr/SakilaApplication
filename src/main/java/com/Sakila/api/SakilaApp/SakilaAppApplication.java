@@ -11,7 +11,7 @@ import java.util.Random;
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
-@CrossOrigin
+@CrossOrigin("*")
 public class SakilaAppApplication {
 
 	@Autowired

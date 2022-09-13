@@ -18,5 +18,19 @@ public class CategoryTest {
         assertEquals("Horror", category.getCategory_name(), "that's not the correct name of the Category");
     }
 
+    @Test
+    void setCategoryId(){
+        Category category = new Category();
+        category.setCategory_id(3);
+        assertEquals(3, category.getCategory_id(), "that's not the correct id of the Category");
+    }
+
+    @Test
+    void setCategoryName(){
+        Category category = new Category("Horror");
+        category.setCategory_name("Action");
+        assertEquals("Action", category.getCategory_name(), "that's not the correct name of the Category");
+    }
+
 
 }
