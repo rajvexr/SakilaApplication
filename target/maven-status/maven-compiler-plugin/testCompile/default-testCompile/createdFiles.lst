@@ -1,3 +1,3 @@
-com\Sakila\api\SakilaApp\MockTesting.class
+com\Sakila\api\SakilaApp\MockTest.class
 CucumberTests\DisplayAllFilmsStepsDefs.class
 CucumberTests\RunCucumberTests.class

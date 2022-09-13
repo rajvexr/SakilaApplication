@@ -14,7 +14,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class MockTesting {
+public class MockTest {
 
     private SakilaAppApplication sakilaAppApplication;
 

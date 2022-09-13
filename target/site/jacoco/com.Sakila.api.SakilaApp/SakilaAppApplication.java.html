@@ -19,55 +19,54 @@ public class SakilaAppApplication {
 	private FilmRepository filmRepository;
 	private CategoryRepository categoryRepository;
 	private LanguageRepository languageRepository;
+	
 
-<span class="nc" id="L23">	Random random = new Random();</span>
-
-<span class="nc" id="L25">	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){</span>
-<span class="nc" id="L26">		this.actorRepository = actorRepository;</span>
-<span class="nc" id="L27">		this.filmRepository = filmRepository;</span>
-<span class="nc" id="L28">		this.categoryRepository = categoryRepository;</span>
-<span class="nc" id="L29">		this.languageRepository = languageRepository;</span>
-<span class="nc" id="L30">	}</span>
+<span class="fc" id="L24">	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){</span>
+<span class="fc" id="L25">		this.actorRepository = actorRepository;</span>
+<span class="fc" id="L26">		this.filmRepository = filmRepository;</span>
+<span class="fc" id="L27">		this.categoryRepository = categoryRepository;</span>
+<span class="fc" id="L28">		this.languageRepository = languageRepository;</span>
+<span class="fc" id="L29">	}</span>
 
 	public static void main(String[] args) {
-<span class="nc" id="L33">		SpringApplication.run(SakilaAppApplication.class, args);}</span>
+<span class="nc" id="L32">		SpringApplication.run(SakilaAppApplication.class, args);}</span>
 
 	////Actors
 
 	@GetMapping(&quot;/allActors&quot;)
 	public @ResponseBody
 	Iterable&lt;Actor&gt; getAllActors(){
-<span class="nc" id="L40">		return actorRepository.findAll();</span>
+<span class="fc" id="L39">		return actorRepository.findAll();</span>
 	}
 
 	@GetMapping(&quot;/Actor/{id}&quot;)
 	@ResponseBody
 	public Optional&lt;Actor&gt; getActor(@PathVariable Integer id){
-<span class="nc" id="L46">		return actorRepository.findById(id);</span>
+<span class="nc" id="L45">		return actorRepository.findById(id);</span>
 	}
 
 	@PostMapping(&quot;/Actor&quot;)
 	@ResponseBody
 	public String addActor(@RequestBody Actor actor){
-<span class="nc" id="L52">		actorRepository.save(actor);</span>
-<span class="nc" id="L53">		return (&quot;Actor successfully added!&quot;);</span>
+<span class="nc" id="L51">		actorRepository.save(actor);</span>
+<span class="nc" id="L52">		return (&quot;Actor successfully added!&quot;);</span>
 	}
 
 	@DeleteMapping(&quot;/Actor/{id}&quot;)
 	@ResponseBody
 	public String deleteActor(@PathVariable Integer id){
-<span class="nc" id="L59">		actorRepository.deleteById(id);</span>
-<span class="nc" id="L60">		return (&quot;Actor successfully deleted&quot;);</span>
+<span class="nc" id="L58">		actorRepository.deleteById(id);</span>
+<span class="nc" id="L59">		return (&quot;Actor successfully deleted&quot;);</span>
 	}
 
 	@PutMapping(&quot;/Actor/{id}&quot;)
 	@ResponseBody
 	public String updateActor(@PathVariable Integer id, @RequestBody Actor newActor){
-<span class="nc" id="L66">		final Actor actor = actorRepository.findById(id).get();</span>
-<span class="nc" id="L67">		actor.setActorFirstName(newActor.actorFirstName);</span>
-<span class="nc" id="L68">		actor.setActorLastName(newActor.actorLastName);</span>
-<span class="nc" id="L69">		actorRepository.save(actor);</span>
-<span class="nc" id="L70">		return (&quot;Actor has been successfully updated!&quot;);</span>
+<span class="nc" id="L65">		final Actor actor = actorRepository.findById(id).get();</span>
+<span class="nc" id="L66">		actor.setActorFirstName(newActor.actorFirstName);</span>
+<span class="nc" id="L67">		actor.setActorLastName(newActor.actorLastName);</span>
+<span class="nc" id="L68">		actorRepository.save(actor);</span>
+<span class="nc" id="L69">		return (&quot;Actor has been successfully updated!&quot;);</span>
 	}
 
 	/////Films
@@ -75,65 +74,65 @@ public class SakilaAppApplication {
 	@GetMapping(&quot;/allFilms&quot;)
 	public @ResponseBody
 	Iterable&lt;Film&gt; getAllFilms(){
-<span class="nc" id="L78">		return filmRepository.findAll();</span>
+<span class="fc" id="L77">		return filmRepository.findAll();</span>
 	}
 
 	@GetMapping(&quot;/Film/{id}&quot;)
 	@ResponseBody
 	public Optional&lt;Film&gt; getFilm(@PathVariable Integer id){
-<span class="nc" id="L84">		return filmRepository.findById(id);</span>
+<span class="nc" id="L83">		return filmRepository.findById(id);</span>
 	}
 
 	@PostMapping(&quot;/Film&quot;)
 	@ResponseBody
 	public String addFilm(@RequestBody Film film){
-<span class="nc" id="L90">		filmRepository.save(film);</span>
-<span class="nc" id="L91">		return (&quot;Film successfully added!&quot;);</span>
+<span class="nc" id="L89">		filmRepository.save(film);</span>
+<span class="nc" id="L90">		return (&quot;Film successfully added!&quot;);</span>
 	}
 
 	@GetMapping(&quot;/filmActorFirstLastName/{id}&quot;)
 	@ResponseBody
 	Iterable&lt;Actor&gt; getFilmActorsFirstLastName(@PathVariable Integer id){
-<span class="nc" id="L97">		return actorRepository.getFilmActorsFirstLastName(id);</span>
+<span class="nc" id="L96">		return actorRepository.getFilmActorsFirstLastName(id);</span>
 	}
 
 	//displays all films with a specific rating
 	@GetMapping(&quot;/Rating/{id}&quot;)
 	@ResponseBody
 	Iterable&lt;Film&gt; getRatings(@PathVariable Integer id){
-<span class="nc" id="L104">		return filmRepository.getRatings(id);</span>
+<span class="nc" id="L103">		return filmRepository.getRatings(id);</span>
 	}
 
 	//displays an actor with all the films they have participated in
 	@GetMapping(&quot;/actorFilms/{id}&quot;)
 	@ResponseBody
 	Iterable&lt;Film&gt; getActorFilms(@PathVariable Integer id){
-<span class="nc" id="L111">		return filmRepository.getActorFilms(id);</span>
+<span class="nc" id="L110">		return filmRepository.getActorFilms(id);</span>
 	}
 
 	@DeleteMapping(&quot;/Film/{id}&quot;)
 	@ResponseBody
 	public String deleteFilm(@PathVariable Integer id){
-<span class="nc" id="L117">		filmRepository.deleteById(id);</span>
-<span class="nc" id="L118">		return (&quot;Film successfully deleted&quot;);</span>
+<span class="nc" id="L116">		filmRepository.deleteById(id);</span>
+<span class="nc" id="L117">		return (&quot;Film successfully deleted&quot;);</span>
 	}
 
 	@PutMapping(&quot;/Film/{id}&quot;)
 	@ResponseBody
 	public String updateFilm(@PathVariable Integer id, @RequestBody Film newFilm){
-<span class="nc" id="L124">		final Film film = filmRepository.findById(id).get();</span>
-<span class="nc" id="L125">		film.setTitle(newFilm.title);</span>
-<span class="nc" id="L126">		film.setDescription(newFilm.description);</span>
-<span class="nc" id="L127">		film.setRelease_year(newFilm.release_year);</span>
-<span class="nc" id="L128">		film.setLanguage_id(newFilm.language_id);</span>
-<span class="nc" id="L129">		film.setRental_duration(newFilm.rental_duration);</span>
-<span class="nc" id="L130">		film.setRental_rate(newFilm.rental_rate);</span>
-<span class="nc" id="L131">		film.setLength(newFilm.length);</span>
-<span class="nc" id="L132">		film.setReplacement_cost(newFilm.replacement_cost);</span>
-<span class="nc" id="L133">		film.setRating(newFilm.rating);</span>
-<span class="nc" id="L134">		film.setSpecial_features(newFilm.special_features);</span>
-<span class="nc" id="L135">		filmRepository.save(film);</span>
-<span class="nc" id="L136">		return (&quot;Film has been successfully updated!&quot;);</span>
+<span class="nc" id="L123">		final Film film = filmRepository.findById(id).get();</span>
+<span class="nc" id="L124">		film.setTitle(newFilm.title);</span>
+<span class="nc" id="L125">		film.setDescription(newFilm.description);</span>
+<span class="nc" id="L126">		film.setRelease_year(newFilm.release_year);</span>
+<span class="nc" id="L127">		film.setLanguage_id(newFilm.language_id);</span>
+<span class="nc" id="L128">		film.setRental_duration(newFilm.rental_duration);</span>
+<span class="nc" id="L129">		film.setRental_rate(newFilm.rental_rate);</span>
+<span class="nc" id="L130">		film.setLength(newFilm.length);</span>
+<span class="nc" id="L131">		film.setReplacement_cost(newFilm.replacement_cost);</span>
+<span class="nc" id="L132">		film.setRating(newFilm.rating);</span>
+<span class="nc" id="L133">		film.setSpecial_features(newFilm.special_features);</span>
+<span class="nc" id="L134">		filmRepository.save(film);</span>
+<span class="nc" id="L135">		return (&quot;Film has been successfully updated!&quot;);</span>
 	}
 
 	////Category
@@ -141,48 +140,48 @@ public class SakilaAppApplication {
 	@GetMapping(&quot;/allCategory&quot;)
 	public @ResponseBody
 	Iterable&lt;Category&gt; getAllCategory(){
-<span class="nc" id="L144">		return categoryRepository.findAll();</span>
+<span class="fc" id="L143">		return categoryRepository.findAll();</span>
 	}
 
 	@GetMapping(&quot;/Category/{id}&quot;)
 	@ResponseBody
 	public Optional&lt;Category&gt; getCategory(@PathVariable Integer id){
-<span class="nc" id="L150">		return categoryRepository.findById(id);</span>
+<span class="nc" id="L149">		return categoryRepository.findById(id);</span>
 	}
 
 	@GetMapping(&quot;/filmCategory/{id}&quot;) //identifying a category for a specific film
 	@ResponseBody
 	public Iterable&lt;Category&gt; getFilmCategory(@PathVariable Integer id){
-<span class="nc" id="L156">		return categoryRepository.getFilmCategory(id);</span>
+<span class="nc" id="L155">		return categoryRepository.getFilmCategory(id);</span>
 	}
 
 	@GetMapping(&quot;/categoryFilm/{id}&quot;)
 	@ResponseBody
 	public Iterable&lt;Film&gt; getCategoryFilm(@PathVariable Integer id){
-<span class="nc" id="L162">		return filmRepository.getCategoryFilm(id);</span>
+<span class="nc" id="L161">		return filmRepository.getCategoryFilm(id);</span>
 	}
 
 	@PostMapping(&quot;/Category&quot;)
 	@ResponseBody
 	public String addCategory(@RequestBody Category category){
-<span class="nc" id="L168">		categoryRepository.save(category);</span>
-<span class="nc" id="L169">		return (&quot;Category successfully added!&quot;);</span>
+<span class="nc" id="L167">		categoryRepository.save(category);</span>
+<span class="nc" id="L168">		return (&quot;Category successfully added!&quot;);</span>
 	}
 
 	@DeleteMapping(&quot;/Category/{id}&quot;)
 	@ResponseBody
 	public String deleteCategory(@PathVariable Integer id){
-<span class="nc" id="L175">		categoryRepository.deleteById(id);</span>
-<span class="nc" id="L176">		return (&quot;Category successfully deleted&quot;);</span>
+<span class="nc" id="L174">		categoryRepository.deleteById(id);</span>
+<span class="nc" id="L175">		return (&quot;Category successfully deleted&quot;);</span>
 	}
 
 	@PutMapping(&quot;/Category/{id}&quot;)
 	@ResponseBody
 	public String updateCategory(@PathVariable Integer id, @RequestBody Category newCategory){
-<span class="nc" id="L182">		final Category category = categoryRepository.findById(id).get();</span>
-<span class="nc" id="L183">		category.setCategory_name(newCategory.category_name);</span>
-<span class="nc" id="L184">		categoryRepository.save(category);</span>
-<span class="nc" id="L185">		return (&quot;Category has been successfully updated!&quot;);</span>
+<span class="nc" id="L181">		final Category category = categoryRepository.findById(id).get();</span>
+<span class="nc" id="L182">		category.setCategory_name(newCategory.category_name);</span>
+<span class="nc" id="L183">		categoryRepository.save(category);</span>
+<span class="nc" id="L184">		return (&quot;Category has been successfully updated!&quot;);</span>
 	}
 
 	////Language
@@ -190,36 +189,36 @@ public class SakilaAppApplication {
 	@GetMapping(&quot;/allLanguage&quot;)
 	public @ResponseBody
 	Iterable&lt;Language&gt; getAllLanguage(){
-<span class="nc" id="L193">		return languageRepository.findAll();</span>
+<span class="fc" id="L192">		return languageRepository.findAll();</span>
 	}
 
 	@GetMapping(&quot;/Language/{id}&quot;)
 	@ResponseBody
 	public Optional&lt;Language&gt; getLanguage(@PathVariable Integer id){
-<span class="nc" id="L199">		return languageRepository.findById(id);</span>
+<span class="nc" id="L198">		return languageRepository.findById(id);</span>
 	}
 
 	@PostMapping(&quot;/Language&quot;)
 	@ResponseBody
 	public String addLanguage(@RequestBody Language language){
-<span class="nc" id="L205">		languageRepository.save(language);</span>
-<span class="nc" id="L206">		return (&quot;Language successfully added!&quot;);</span>
+<span class="nc" id="L204">		languageRepository.save(language);</span>
+<span class="nc" id="L205">		return (&quot;Language successfully added!&quot;);</span>
 	}
 
 	@DeleteMapping(&quot;/Language/{id}&quot;)
 	@ResponseBody
 	public String deleteLanguage(@PathVariable Integer id){
-<span class="nc" id="L212">		languageRepository.deleteById(id);</span>
-<span class="nc" id="L213">		return (&quot;Language successfully deleted&quot;);</span>
+<span class="nc" id="L211">		languageRepository.deleteById(id);</span>
+<span class="nc" id="L212">		return (&quot;Language successfully deleted&quot;);</span>
 	}
 
 	@PutMapping(&quot;/Language/{id}&quot;)
 	@ResponseBody
 	public String updateLanguage(@PathVariable Integer id, @RequestBody Language newLanguage){
-<span class="nc" id="L219">		final Language language = languageRepository.findById(id).get();</span>
-<span class="nc" id="L220">		language.setLanguage_name(newLanguage.language_name);</span>
-<span class="nc" id="L221">		languageRepository.save(language);</span>
-<span class="nc" id="L222">		return (&quot;Language has been successfully updated!&quot;);</span>
+<span class="nc" id="L218">		final Language language = languageRepository.findById(id).get();</span>
+<span class="nc" id="L219">		language.setLanguage_name(newLanguage.language_name);</span>
+<span class="nc" id="L220">		languageRepository.save(language);</span>
+<span class="nc" id="L221">		return (&quot;Language has been successfully updated!&quot;);</span>
 	}
 
 }
