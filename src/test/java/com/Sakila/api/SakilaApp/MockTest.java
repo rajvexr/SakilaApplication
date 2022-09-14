@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -163,15 +164,54 @@ public class MockTest {
         Assertions.assertEquals(Expected, Actual, "error");
     }
 
-//    @Test
-//    void GetUpdateFilm(){
-//        Film testFilm = new Film();
-//        when(filmRepository.findById(1)).thenReturn(Optional.of(testFilm));
-//        Film film = sakilaAppApplication.getFilm(1);
-//        Film Expected = testFilm;
-//        Film Actual = film.get();
-//        Assertions.assertEquals(Expected, Actual, "error");
-//
-//    }
+    @Test
+    void DeleteFilmById(){
+    Film film = new Film();
+    film.setTitle("test title");
+    film.setFilm_id(1);
+    sakilaAppApplication.deleteFilm(film.getFilm_id());
+    verify(filmRepository).deleteById(film.getFilm_id());
+}
+
+    @Test
+    void DeleteCategoryById(){
+        Category category = new Category();
+        category.setCategory_name("Action");
+        category.setCategory_id(1);
+        sakilaAppApplication.deleteCategory(category.getCategory_id());
+        verify(categoryRepository).deleteById(category.getCategory_id());
+    }
+
+    @Test
+    void DeleteActorById(){
+        Actor actor = new Actor();
+        actor.setActorFirstName("Raj");
+        actor.setActorLastName("Singh");
+        actor.setActor_id(3);
+        sakilaAppApplication.deleteActor(actor.getActor_id());
+        verify(actorRepository).deleteById(actor.getActor_id());
+    }
+
+    @Test
+    void DeleteLanguageById(){
+        Language language = new Language();
+        language.setLanguage_name("Spanish");
+        language.setLanguage_id(6);
+        sakilaAppApplication.deleteLanguage(language.getLanguage_id());
+        verify(languageRepository).deleteById(language.getLanguage_id());
+    }
+
+    @Test
+    void UpdateFilmById() {
+        Film film = new Film();
+        film.setFilm_id(1);
+        film.setTitle("test title");
+        Film newFilm = new Film();
+        newFilm.setTitle("another test title");
+        given(filmRepository.findById(film.getFilm_id())).willReturn(Optional.of(film));
+        sakilaAppApplication.updateFilm(film.getFilm_id(), newFilm);
+        verify(filmRepository).findById(film.getFilm_id());
+        verify(filmRepository).save(film);
+    }
 
 }

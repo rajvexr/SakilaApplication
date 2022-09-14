@@ -1,6 +1,7 @@
 package com.Sakila.api.SakilaApp;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "film")
@@ -140,4 +141,5 @@ public class Film {
     public void setSpecial_features(String special_features) {
         this.special_features = special_features;
     }
+
 }
