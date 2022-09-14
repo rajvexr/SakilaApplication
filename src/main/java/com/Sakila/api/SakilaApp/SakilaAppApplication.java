@@ -45,8 +45,8 @@ public class SakilaAppApplication {
 	}
 
 	@PostMapping("/Actor")
-	public @ResponseBody
-	String addActor(@RequestBody Actor actor){
+	@ResponseBody
+	public String addActor(@RequestBody Actor actor){
 		actorRepository.save(actor);
 		return ("Actor successfully added!");
 	}

@@ -4,11 +4,15 @@ import com.Sakila.api.SakilaApp.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.mock;
+import java.util.Optional;
 
-public class DisplayAllCategoriesStepsDefs{
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class DisplayCategoriesByIdStepsDefs {
 
     private SakilaAppApplication sakilaAppApplication;
 
@@ -21,7 +25,7 @@ public class DisplayAllCategoriesStepsDefs{
     @Mock
     private LanguageRepository languageRepository;
 
-    public DisplayAllCategoriesStepsDefs(){
+    public DisplayCategoriesByIdStepsDefs(){
         actorRepository = mock(ActorRepository.class);
         filmRepository = mock(FilmRepository.class);
         categoryRepository = mock(CategoryRepository.class);
@@ -32,22 +36,33 @@ public class DisplayAllCategoriesStepsDefs{
                                                         languageRepository);
     }
 
+    Category expected;
+    Category categoryTest;
 
 
-    @When("the category page loads")
-    public void the_category_page_loads() {
+    @Given("the category has an id")
+    public void the_category_has_an_id() {
+        int id = 1;
+        expected = new Category();
+        expected.setCategory_id(1);
+        expected.setCategory_name("Horror");
 
     }
-
+    @Given("the database finds an id for the category")
+    public void the_database_finds_an_id_for_the_category() {
+    categoryRepository.findById(1);
+    }
     @When("the category api connects")
     public void the_category_api_connects() {
-
+    when(categoryRepository.findById(1)).thenReturn(Optional.of(expected));
+        categoryTest = categoryRepository.findById(1).get();
+    }
+    @Then("display a categories")
+    public void display_a_categories() {
+    Assertions.assertEquals(expected, categoryTest, "there is an error fetching data for the category");
     }
 
-    @Then("display all categories")
-    public void display_all_categories() {
 
-    }
 
 
 
