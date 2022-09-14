@@ -214,4 +214,30 @@ public class MockTest {
         verify(filmRepository).save(film);
     }
 
+    @Test
+    void UpdateCategoryById() {
+        Category category = new Category();
+        category.setCategory_id(1);
+        category.setCategory_name("Horror");
+        Category newCategory = new Category();
+        newCategory.setCategory_name("comedy");
+        given(categoryRepository.findById(category.getCategory_id())).willReturn(Optional.of(category));
+        sakilaAppApplication.updateCategory(category.getCategory_id(), newCategory);
+        verify(categoryRepository).findById(category.getCategory_id());
+        verify(categoryRepository).save(category);
+    }
+
+    @Test
+    void UpdateActorById() {
+        Actor actor = new Actor();
+        actor.setActor_id(1);
+        actor.setActorFirstName("Nicki");
+        Actor newActor = new Actor();
+        newActor.setActorFirstName("John");
+        given(actorRepository.findById(actor.getActor_id())).willReturn(Optional.of(actor));
+        sakilaAppApplication.updateActor(actor.getActor_id(), newActor);
+        verify(actorRepository).findById(actor.getActor_id());
+        verify(actorRepository).save(actor);
+    }
+
 }
