@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -55,6 +56,7 @@ public class MockTest {
 
         Assertions.assertEquals(Expected, Actual, "get all films which are wrong");
     }
+
 
     @Test
     void testAllActors() {
@@ -117,6 +119,46 @@ public class MockTest {
         Iterable<Language> Actual = sakilaAppApplication.getAllLanguage();
 
         Assertions.assertEquals(Expected, Actual, "get all language which are wrong");
+    }
+
+    @Test
+    void GetFilmById(){
+        Film testFilm = new Film();
+        when(filmRepository.findById(1)).thenReturn(Optional.of(testFilm));
+        Optional<Film> film = sakilaAppApplication.getFilm(1);
+        Film Expected = testFilm;
+        Film Actual = film.get();
+        Assertions.assertEquals(Expected, Actual, "error");
+    }
+
+    @Test
+    void GetCategoryById(){
+        Category testCategory = new Category();
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(testCategory));
+        Optional<Category> category = sakilaAppApplication.getCategory(1);
+        Category Expected = testCategory;
+        Category Actual = category.get();
+        Assertions.assertEquals(Expected, Actual, "error");
+    }
+
+    @Test
+    void GetActorById(){
+        Actor testActor = new Actor();
+        when(actorRepository.findById(1)).thenReturn(Optional.of(testActor));
+        Optional<Actor> actor = sakilaAppApplication.getActor(1);
+        Actor Expected = testActor;
+        Actor Actual = actor.get();
+        Assertions.assertEquals(Expected, Actual, "error");
+    }
+
+    @Test
+    void GetLanguageById(){
+        Language testLanguage = new Language();
+        when(languageRepository.findById(1)).thenReturn(Optional.of(testLanguage));
+        Optional<Language> language = sakilaAppApplication.getLanguage(1);
+        Language Expected = testLanguage;
+        Language Actual = language.get();
+        Assertions.assertEquals(Expected, Actual, "error");
     }
 
 }
