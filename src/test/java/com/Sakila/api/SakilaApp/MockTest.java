@@ -161,14 +161,14 @@ public class MockTest {
         Assertions.assertEquals(Expected, Actual, "error");
     }
 
-    @Test
-    void GetFilmCategory(){
-        Category testFilmCategory = new Category();
-        when(categoryRepository.findById(1)).thenReturn(Optional.of(testFilmCategory));
-        Iterable<Category> category = sakilaAppApplication.getFilmCategory(1);
-        Category Expected = testFilmCategory;
-        Category Actual = (Category) category;
-        Assertions.assertEquals(Expected, Actual, "error");
-    }
+//    @Test
+//    void GetFilmCategory(){
+//        Category testFilmCategory = new Category();
+//        when(categoryRepository.findById(1)).thenReturn(Optional.of(testFilmCategory));
+//        Iterable<Category> category = sakilaAppApplication.getFilmCategory(1);
+//        Category Expected = testFilmCategory;
+//        Category Actual = (Category) category;
+//        Assertions.assertEquals(Expected, Actual, "error");
+//    }
 
 }
