@@ -13,13 +13,13 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class SakilaAppApplication {
 
-	@Autowired
+	@Autowired //connects repo to sql
 	private ActorRepository actorRepository;
 	private FilmRepository filmRepository;
 	private CategoryRepository categoryRepository;
 	private LanguageRepository languageRepository;
 	
-
+///////constructor
 	public SakilaAppApplication(ActorRepository actorRepository, FilmRepository filmRepository, CategoryRepository categoryRepository, LanguageRepository languageRepository){
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
@@ -32,33 +32,33 @@ public class SakilaAppApplication {
 
 	////Actors
 
-	@GetMapping("/allActors")
+	@GetMapping("/allActors") //READ-to read resources in the REST environment, I used HTTP GET method
 	public @ResponseBody
 	Iterable<Actor> getAllActors(){
 		return actorRepository.findAll();
 	}
 
-	@GetMapping("/Actor/{id}")
+	@GetMapping("/Actor/{id}") //READ
 	@ResponseBody
 	public Optional<Actor> getActor(@PathVariable Integer id){
 		return actorRepository.findById(id);
 	}
 
-	@PostMapping("/Actor")
+	@PostMapping("/Actor") //CREATE
 	@ResponseBody
 	public String addActor(@RequestBody Actor actor){
 		actorRepository.save(actor);
 		return ("Actor successfully added!");
 	}
 
-	@DeleteMapping("/Actor/{id}")
+	@DeleteMapping("/Actor/{id}") //DELETE
 	@ResponseBody
 	public String deleteActor(@PathVariable Integer id){
 		actorRepository.deleteById(id);
 		return ("Actor successfully deleted");
 	}
 
-	@PutMapping("/Actor/{id}")
+	@PutMapping("/Actor/{id}") //UPDATE
 	@ResponseBody
 	public String updateActor(@PathVariable Integer id, @RequestBody Actor newActor){
 		final Actor actor = actorRepository.findById(id).get();
@@ -89,7 +89,7 @@ public class SakilaAppApplication {
 		return ("Film successfully added!");
 	}
 
-	@GetMapping("/filmActorFirstLastName/{id}")
+	@GetMapping("/filmActorFirstLastName/{id}") //displays all actors in a specific film
 	@ResponseBody
 	Iterable<Actor> getFilmActorsFirstLastName(@PathVariable Integer id){
 		return actorRepository.getFilmActorsFirstLastName(id);
@@ -154,7 +154,7 @@ public class SakilaAppApplication {
 		return categoryRepository.getFilmCategory(id);
 	}
 
-	@GetMapping("/categoryFilm/{id}")
+	@GetMapping("/categoryFilm/{id}") //showing all films in a specific category
 	@ResponseBody
 	public Iterable<Film> getCategoryFilm(@PathVariable Integer id){
 		return filmRepository.getCategoryFilm(id);

@@ -1,7 +1,6 @@
 package com.Sakila.api.SakilaApp;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "film")

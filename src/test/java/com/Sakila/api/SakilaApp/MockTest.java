@@ -1,11 +1,9 @@
 package com.Sakila.api.SakilaApp;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -18,10 +16,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class MockTest {
+class MockTest {
 
     private SakilaAppApplication sakilaAppApplication;
 
+    //mock data from each repository
     @Mock
     ActorRepository actorRepository;
     @Mock
@@ -37,6 +36,34 @@ public class MockTest {
                                                         filmRepository,
                                                         categoryRepository,
                                                         languageRepository);
+    }
+
+
+    @Test
+    void testAllCategory() {
+
+        //creates a new array list for category
+        List<Category> categoryList = new ArrayList<>();
+
+        //creating a new object for category giving a category name
+        Category testCategory = new Category("Horror");
+        Category testCategory2 = new Category("Action");
+
+        //adding the objects created into the category array list
+        categoryList.add(testCategory);
+        categoryList.add(testCategory2);
+
+        //creating an iterable from the category list
+        Iterable<Category> categoryIterable = categoryList;
+
+        //when the categoryRepository.findAll() function gets called, it returns categoryIterable
+        when(categoryRepository.findAll()).thenReturn(categoryIterable);
+
+        //setting variables for expected and actual
+        Iterable<Category> Expected = categoryIterable;
+        Iterable<Category> Actual = sakilaAppApplication.getAllCategory();
+
+        Assertions.assertEquals(Expected, Actual, "get all categories which are wrong");
     }
 
     @Test
@@ -82,26 +109,6 @@ public class MockTest {
         Assertions.assertEquals(Expected, Actual, "get all actors which are wrong");
     }
 
-    @Test
-    void testAllCategory() {
-
-        List<Category> categoryList = new ArrayList<>();
-
-        Category testCategory = new Category("Horror");
-        Category testCategory2 = new Category("Action");
-
-        categoryList.add(testCategory);
-        categoryList.add(testCategory2);
-
-        Iterable<Category> categoryIterable = categoryList;
-
-        when(categoryRepository.findAll()).thenReturn(categoryIterable);
-
-        Iterable<Category> Expected = categoryIterable;
-        Iterable<Category> Actual = sakilaAppApplication.getAllCategory();
-
-        Assertions.assertEquals(Expected, Actual, "get all categories which are wrong");
-    }
 
     @Test
     void testAllLanguage() {
@@ -126,8 +133,12 @@ public class MockTest {
 
     @Test
     void GetFilmById(){
-        Film testFilm = new Film();
+        Film testFilm = new Film(); //creating a new film object
+
+        //when the filmRepository.findById(1) gets called,then it will return test film
         when(filmRepository.findById(1)).thenReturn(Optional.of(testFilm));
+
+        //creating an
         Optional<Film> film = sakilaAppApplication.getFilm(1);
         Film Expected = testFilm;
         Film Actual = film.get();
