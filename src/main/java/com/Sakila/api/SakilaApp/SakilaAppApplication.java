@@ -30,7 +30,9 @@ public class SakilaAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaAppApplication.class, args);}
 
-	////Actors
+												////////////////
+												//////Actor\\\\\
+												////////////////
 
 	@GetMapping("/allActors") //READ-to read resources in the REST environment, I used HTTP GET method
 	public @ResponseBody
@@ -38,27 +40,27 @@ public class SakilaAppApplication {
 		return actorRepository.findAll();
 	}
 
-	@GetMapping("/Actor/{id}") //READ
+	@GetMapping("/Actor/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Optional<Actor> getActor(@PathVariable Integer id){
 		return actorRepository.findById(id);
 	}
 
-	@PostMapping("/Actor") //CREATE
+	@PostMapping("/Actor") //CREATE-to create resources in the REST environment, I used HTTP POST method
 	@ResponseBody
 	public String addActor(@RequestBody Actor actor){
 		actorRepository.save(actor);
 		return ("Actor successfully added!");
 	}
 
-	@DeleteMapping("/Actor/{id}") //DELETE
+	@DeleteMapping("/Actor/{id}") //DELETE-to delete resources in the REST environment, I used HTTP DELETE method
 	@ResponseBody
 	public String deleteActor(@PathVariable Integer id){
 		actorRepository.deleteById(id);
 		return ("Actor successfully deleted");
 	}
 
-	@PutMapping("/Actor/{id}") //UPDATE
+	@PutMapping("/Actor/{id}") //UPDATE-to update resources in the REST environment, I used HTTP PUT method
 	@ResponseBody
 	public String updateActor(@PathVariable Integer id, @RequestBody Actor newActor){
 		final Actor actor = actorRepository.findById(id).get();
@@ -68,55 +70,58 @@ public class SakilaAppApplication {
 		return ("Actor has been successfully updated!");
 	}
 
-	/////Films
+												////////////////
+												//////Film\\\\\\
+												////////////////
 
-	@GetMapping("/allFilms")
+	@GetMapping("/allFilms")//READ-to read resources in the REST environment, I used HTTP GET method
 	public @ResponseBody
 	Iterable<Film> getAllFilms(){
 		return filmRepository.findAll();
 	}
 
-	@GetMapping("/Film/{id}")
+	@GetMapping("/Film/{id}")//READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Optional<Film> getFilm(@PathVariable Integer id){
 		return filmRepository.findById(id);
 	}
 
-	@PostMapping("/Film")
+	@PostMapping("/Film") //CREATE-to create resources in the REST environment, I used HTTP POST method
 	@ResponseBody
 	public String addFilm(@RequestBody Film film){
 		filmRepository.save(film);
 		return ("Film successfully added!");
 	}
 
-	@GetMapping("/filmActorFirstLastName/{id}") //displays all actors in a specific film
+	//displays all actors in a specific film
+	@GetMapping("/filmActorFirstLastName/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	Iterable<Actor> getFilmActorsFirstLastName(@PathVariable Integer id){
 		return actorRepository.getFilmActorsFirstLastName(id);
 	}
 
 	//displays all films with a specific rating
-	@GetMapping("/Rating/{id}")
+	@GetMapping("/Rating/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	Iterable<Film> getRatings(@PathVariable Integer id){
 		return filmRepository.getRatings(id);
 	}
 
 	//displays an actor with all the films they have participated in
-	@GetMapping("/actorFilms/{id}")
+	@GetMapping("/actorFilms/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	Iterable<Film> getActorFilms(@PathVariable Integer id){
 		return filmRepository.getActorFilms(id);
 	}
 
-	@DeleteMapping("/Film/{id}")
+	@DeleteMapping("/Film/{id}")//DELETE-to delete resources in the REST environment, I used HTTP DELETE method
 	@ResponseBody
 	public String deleteFilm(@PathVariable Integer id){
 		filmRepository.deleteById(id);
 		return ("Film successfully deleted");
 	}
 
-	@PutMapping("/Film/{id}")
+	@PutMapping("/Film/{id}") //UPDATE-to update resources in the REST environment, I used HTTP PUT method
 	@ResponseBody
 	public String updateFilm(@PathVariable Integer id, @RequestBody Film newFilm){
 		final Film film = filmRepository.findById(id).get();
@@ -134,47 +139,51 @@ public class SakilaAppApplication {
 		return ("Film has been successfully updated!");
 	}
 
-	////Category
+												////////////////
+												////Category\\\\
+												////////////////
 
-	@GetMapping("/allCategory")
+	@GetMapping("/allCategory") //READ-to read resources in the REST environment, I used HTTP GET method
 	public @ResponseBody
 	Iterable<Category> getAllCategory(){
 		return categoryRepository.findAll();
 	}
 
-	@GetMapping("/Category/{id}")
+	@GetMapping("/Category/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Optional<Category> getCategory(@PathVariable Integer id){
 		return categoryRepository.findById(id);
 	}
 
-	@GetMapping("/filmCategory/{id}") //identifying a category for a specific film
+	//identifying a category for a specific film
+	@GetMapping("/filmCategory/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Iterable<Category> getFilmCategory(@PathVariable Integer id){
 		return categoryRepository.getFilmCategory(id);
 	}
 
-	@GetMapping("/categoryFilm/{id}") //showing all films in a specific category
+	//showing all films in a specific category
+	@GetMapping("/categoryFilm/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Iterable<Film> getCategoryFilm(@PathVariable Integer id){
 		return filmRepository.getCategoryFilm(id);
 	}
 
-	@PostMapping("/Category")
+	@PostMapping("/Category") //CREATE-to create resources in the REST environment, I used HTTP POST method
 	@ResponseBody
 	public String addCategory(@RequestBody Category category){
 		categoryRepository.save(category);
 		return ("Category successfully added!");
 	}
 
-	@DeleteMapping("/Category/{id}")
+	@DeleteMapping("/Category/{id}")//DELETE-to delete resources in the REST environment, I used HTTP DELETE method
 	@ResponseBody
 	public String deleteCategory(@PathVariable Integer id){
 		categoryRepository.deleteById(id);
 		return ("Category successfully deleted");
 	}
 
-	@PutMapping("/Category/{id}")
+	@PutMapping("/Category/{id}") //UPDATE-to update resources in the REST environment, I used HTTP PUT method
 	@ResponseBody
 	public String updateCategory(@PathVariable Integer id, @RequestBody Category newCategory){
 		final Category category = categoryRepository.findById(id).get();
@@ -183,35 +192,37 @@ public class SakilaAppApplication {
 		return ("Category has been successfully updated!");
 	}
 
-	////Language
+											////////////////
+											////Language\\\\
+											////////////////
 
-	@GetMapping("/allLanguage")
+	@GetMapping("/allLanguage") //READ-to read resources in the REST environment, I used HTTP GET method
 	public @ResponseBody
 	Iterable<Language> getAllLanguage(){
 		return languageRepository.findAll();
 	}
 
-	@GetMapping("/Language/{id}")
+	@GetMapping("/Language/{id}") //READ-to read resources in the REST environment, I used HTTP GET method
 	@ResponseBody
 	public Optional<Language> getLanguage(@PathVariable Integer id){
 		return languageRepository.findById(id);
 	}
 
-	@PostMapping("/Language")
+	@PostMapping("/Language") //CREATE-to create resources in the REST environment, I used HTTP POST method
 	@ResponseBody
 	public String addLanguage(@RequestBody Language language){
 		languageRepository.save(language);
 		return ("Language successfully added!");
 	}
 
-	@DeleteMapping("/Language/{id}")
+	@DeleteMapping("/Language/{id}")//DELETE-to delete resources in the REST environment, I used HTTP DELETE method
 	@ResponseBody
 	public String deleteLanguage(@PathVariable Integer id){
 		languageRepository.deleteById(id);
 		return ("Language successfully deleted");
 	}
 
-	@PutMapping("/Language/{id}")
+	@PutMapping("/Language/{id}") //UPDATE-to update resources in the REST environment, I used HTTP PUT method
 	@ResponseBody
 	public String updateLanguage(@PathVariable Integer id, @RequestBody Language newLanguage){
 		final Language language = languageRepository.findById(id).get();

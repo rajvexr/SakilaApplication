@@ -251,4 +251,17 @@ class MockTest {
         verify(actorRepository).save(actor);
     }
 
+    @Test
+    void UpdateLanguageById() {
+        Language language = new Language();
+        language.setLanguage_id(1);
+        language.setLanguage_name("English");
+        Language newLanguage = new Language();
+        newLanguage.setLanguage_name("Spanish");
+        given(languageRepository.findById(language.getLanguage_id())).willReturn(Optional.of(language));
+        sakilaAppApplication.updateLanguage(language.getLanguage_id(), newLanguage);
+        verify(languageRepository).findById(language.getLanguage_id());
+        verify(languageRepository).save(language);
+    }
+
 }
